@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The High Performer Pressure Score</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --navy: #363657;
+      --deep: #1A1A2E;
+      --pink: #FF8CA8;
+      --pink-hot: #FF6B9D;
+      --warm: #F7F4F2;
+      --white: #FFFFFF;
+      --muted: rgba(54, 54, 87, 0.55);
+      --line: rgba(54, 54, 87, 0.12);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--warm);
+      color: var(--navy);
+      min-height: 100vh;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+    }
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 0 0;
+      margin-bottom: 48px;
+    }
+
+    .logo-mark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--navy);
+      opacity: 0.5;
+    }
+
+    .logo-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--pink);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 20px 0 52px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 52px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--pink-hot);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 7vw, 58px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--pink);
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--navy);
+      max-width: 420px;
+      margin: 20px auto 0;
+      line-height: 1.8;
+    }
+
+    .intro {
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .intro-pillars {
+      display: flex;
+      gap: 12px;
+      margin: 40px 0 44px;
+      justify-content: center;
+    }
+
+    .pillar {
+      flex: 1;
+      max-width: 160px;
+      padding: 20px 16px;
+      background: var(--white);
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid var(--line);
+    }
+
+    .pillar-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--navy);
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pillar-icon svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: var(--pink);
+      stroke-width: 1.5;
+    }
+
+    .pillar-name {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .pillar-desc {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .intro-features {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 380px;
+      margin: 0 auto 44px;
+      text-align: left;
+    }
+
+    .intro-feat {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--navy);
+      line-height: 1.55;
+    }
+
+    .feat-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--pink);
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn-start {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 52px;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      border-radius: 6px;
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-start:hover {
+      background: var(--deep);
+      transform: translateY(-1px);
+    }
+
+    .time-note {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--muted);
+      margin-top: 14px;
+      letter-spacing: 0.04em;
+    }
+
+    .progress-wrap {
+      margin-bottom: 44px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .progress-qnum {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .progress-dim {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--pink-hot);
+    }
+
+    .progress-track {
+      height: 2px;
+      background: var(--line);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--navy), var(--pink));
+      border-radius: 2px;
+      transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .q-card {
+      animation: fadeUp 0.35s ease both;
+    }
+
+    .q-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 4.5vw, 30px);
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--navy);
+      margin-bottom: 36px;
+    }
+
+    .scale-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 14px;
+    }
+
+    .scale-btns {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 52px;
+    }
+
+    .s-btn {
+      flex: 1;
+      height: 56px;
+      background: var(--white);
+      border: 1.5px solid var(--line);
+      border-radius: 8px;
+      font-family: 'Jost', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--navy);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .s-btn:hover {
+        border-color: var(--navy);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(54, 54, 87, 0.1);
+      }
+    }
+
+    .s-btn:active {
+      border-color: var(--navy);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(54, 54, 87, 0.1);
+    }
+
+    .s-btn.selected {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(54, 54, 87, 0.25);
+    }
+
+    @keyframes btnFlash {
+      0% {
+        transform: translateY(-2px) scale(1);
+      }
+
+      50% {
+        transform: translateY(-4px) scale(1.05);
+      }
+
+      100% {
+        transform: translateY(-2px) scale(1);
+      }
+    }
+
+    .s-btn.flash {
+      animation: btnFlash 0.28s ease;
+    }
+
+    .btn-back {
+      background: none;
+      border: none;
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 8px 0;
+      transition: color 0.15s;
+    }
+
+    .btn-back:hover {
+      color: var(--navy);
+    }
+
+    .email-gate {
+      animation: fadeUp 0.4s ease both;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .gate-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: var(--navy);
+      border-radius: 40px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 28px;
+    }
+
+    .gate-badge-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--pink);
+    }
+
+    .email-gate h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 5.5vw, 44px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    .email-gate h2 em {
+      font-style: italic;
+      color: var(--pink);
+    }
+
+    .gate-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 380px;
+      margin: 0 auto 36px;
+      line-height: 1.75;
+    }
+
+    .gate-form {
+      max-width: 360px;
+      margin: 0 auto;
+    }
+
+    .gate-form input {
+      width: 100%;
+      padding: 15px 18px;
+      font-family: 'Jost', sans-serif;
+      font-size: 15px;
+      font-weight: 300;
+      background: var(--white);
+      border: 1.5px solid var(--line);
+      border-radius: 6px;
+      color: var(--navy);
+      margin-bottom: 10px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .gate-form input:focus {
+      border-color: var(--pink);
+    }
+
+    .gate-form input::placeholder {
+      color: var(--muted);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 17px;
+      background: var(--pink-hot);
+      color: var(--white);
+      border: none;
+      border-radius: 6px;
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      margin-top: 4px;
+    }
+
+    .btn-submit:hover {
+      background: var(--pink);
+      transform: translateY(-1px);
+    }
+
+    .privacy {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--muted);
+      margin-top: 14px;
+      letter-spacing: 0.03em;
+    }
+
+    .results {
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .result-hero {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 48px 40px;
+      text-align: center;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .result-hero::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: var(--pink);
+      opacity: 0.07;
+    }
+
+    .result-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: -40px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: var(--pink);
+      opacity: 0.04;
+    }
+
+    .result-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .result-name-label {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.45);
+      margin-bottom: 6px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .result-tier {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(34px, 6vw, 50px);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 4px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .result-tier em {
+      font-style: italic;
+      color: var(--pink);
+    }
+
+    .result-tagline {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 0;
+      letter-spacing: 0.04em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .result-score-wrap {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 4px;
+      margin: 22px 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .result-score-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      font-weight: 400;
+      line-height: 1;
+      color: var(--white);
+    }
+
+    .result-score-denom {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .result-desc {
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.82);
+      max-width: 440px;
+      margin: 0 auto;
+      line-height: 1.82;
+      position: relative;
+      z-index: 1;
+    }
+
+    .breakdown {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 24px;
+      border: 1px solid var(--line);
+    }
+
+    .breakdown-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 24px;
+    }
+
+    .dim-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .dim-row:last-child {
+      border-bottom: none;
+    }
+
+    .dim-name {
+      flex: 0 0 150px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--navy);
+    }
+
+    .dim-track {
+      flex: 1;
+      height: 5px;
+      background: var(--warm);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .dim-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .dim-fill.hi {
+      background: linear-gradient(90deg, var(--navy), var(--pink-hot));
+    }
+
+    .dim-fill.md {
+      background: linear-gradient(90deg, var(--navy), var(--pink));
+    }
+
+    .dim-fill.lo {
+      background: linear-gradient(90deg, #7B8FC0, #B8C8E8);
+    }
+
+    .dim-val {
+      flex: 0 0 40px;
+      text-align: right;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .video-block {
+      background: var(--navy);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .video-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 14px;
+    }
+
+    .video-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+
+    .video-embed {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .video-embed iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: rgba(255, 255, 255, 0.25);
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    .video-placeholder svg {
+      width: 52px;
+      height: 52px;
+    }
+
+    .cta-block {
+      background: var(--warm);
+      border: 1.5px solid var(--line);
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .cta-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pink-hot);
+      margin-bottom: 14px;
+    }
+
+    .cta-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.3;
+      margin-bottom: 14px;
+    }
+
+    .cta-block p {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 380px;
+      margin: 0 auto 28px;
+      line-height: 1.75;
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 40px;
+      background: var(--pink-hot);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 6px;
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-cta:hover {
+      background: var(--pink);
+      transform: translateY(-1px);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 520px) {
+      .intro-pillars {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .pillar {
+        max-width: 100%;
+        width: 100%;
+      }
+
+      .result-hero {
+        padding: 36px 24px;
+      }
+
+      .breakdown {
+        padding: 24px 20px;
+      }
+
+      .dim-name {
+        flex: 0 0 110px;
+        font-size: 11px;
+      }
+
+      .cta-block {
+        padding: 28px 20px;
+      }
+
+      .video-block {
+        padding: 24px 20px;
+      }
+
+      .scale-btns {
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="shell">
+
+    <header class="site-header">
+      <div class="logo-mark">
+        <div class="logo-dot"></div>
+        SDC Coaching
+      </div>
+    </header>
+
+    <div class="hero">
+      <div class="hero-tag">Diagnostic Assessment</div>
+      <h1>The High Performer<br><em>Pressure Score</em></h1>
+      <p class="hero-sub">For driven professionals who have everything yet life still feels heavier than it could</p>
+    </div>
+
+    <div id="screen-intro" class="intro">
+      <div style="text-align:center; margin-bottom: 44px;">
+        <button class="btn-start" onclick="startQuiz()">Begin Assessment</button>
+        <p class="time-note">Takes approximately 3 minutes</p>
+      </div>
+
+      <div class="intro-pillars">
+        <div class="pillar">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="8" />
+              <path d="M12 8v4l3 3" />
+            </svg>
+          </div>
+          <div class="pillar-name">Peace</div>
+          <div class="pillar-desc">Your natural state</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+            </svg>
+          </div>
+          <div class="pillar-name">Power</div>
+          <div class="pillar-desc">Understanding the nature of your experience</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+          </div>
+          <div class="pillar-name">Performance</div>
+          <div class="pillar-desc">What arises naturally when Peace and Power are aligned</div>
+        </div>
+      </div>
+
+      <div class="intro-features">
+        <div class="intro-feat">
+          <div class="feat-dot"></div><span>18 questions across the 6 dimensions of high performance</span>
+        </div>
+        <div class="intro-feat">
+          <div class="feat-dot"></div><span>Discover whether you're The Performing Being, The Seeking Being, or The
+            Grounded Being</span>
+        </div>
+        <div class="intro-feat">
+          <div class="feat-dot"></div><span>A personalised breakdown showing exactly where your energy is going</span>
+        </div>
+        <div class="intro-feat">
+          <div class="feat-dot"></div><span>Discover a path forward to develop your Peace, Power and Performance</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="screen-quiz" class="hidden">
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span class="progress-qnum" id="q-num">Question 1 of 18</span>
+          <span class="progress-dim" id="q-dim">Internal Pressure</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="prog-fill" style="width:0%"></div>
+        </div>
+      </div>
+      <div id="q-area"></div>
+    </div>
+
+    <div id="screen-email" class="email-gate hidden">
+      <div class="gate-badge">
+        <div class="gate-badge-dot"></div> Your results are ready
+      </div>
+      <h2>One last step<br>before your <em>score.</em></h2>
+      <p class="gate-sub">Enter your details below to unlock your full Pressure Score and a personal message from Shaun.
+      </p>
+      <div class="gate-form">
+        <input type="text" id="inp-name" placeholder="First name" autocomplete="given-name" />
+        <input type="email" id="inp-email" placeholder="Email address" autocomplete="email" />
+        <button class="btn-submit" onclick="submitGate()">Reveal My Score →</button>
+        <p class="privacy">No spam, ever. Your details are safe.</p>
+      </div>
+    </div>
+
+    <div id="screen-results" class="results hidden"></div>
+
+  </div>
+
+  <script>
+    const DIMS = [
+      {
+        id: 'pressure', label: 'Internal Pressure', qs: [
+          'I feel responsible for holding everything together.',
+          "I often feel behind, even when I'm keeping up.",
+          'My mind rarely fully switches off.'
+        ]
+      },
+      {
+        id: 'noise', label: 'Mental Noise', qs: [
+          'I find it difficult to stop thinking about problems.',
+          'I imagine worst-case scenarios more than most.',
+          'My mind jumps ahead to future problems before the current one is resolved.'
+        ]
+      },
+      {
+        id: 'criticism', label: 'Self-Criticism', qs: [
+          'I am harder on myself than others are.',
+          "I feel guilty when I'm not being productive.",
+          'I often feel like I should be doing better.'
+        ]
+      },
+      {
+        id: 'identity', label: 'Performance Identity', qs: [
+          'My sense of self-worth depends on how well I perform.',
+          'When I fail or underperform, I question who I am.',
+          'I feel a constant pressure to prove myself.'
+        ]
+      },
+      {
+        id: 'presence', label: 'Presence', qs: [
+          "Work follows me home mentally, even when I'm not working.",
+          'I struggle to switch off and be fully present.',
+          "I'm often distracted when spending time with the people I care about."
+        ]
+      },
+      {
+        id: 'ease', label: 'Ease vs Pressure', qs: [
+          "Life feels heavier than it should, given what I've achieved.",
+          'Even when things are going well, I feel tense underneath.',
+          'I rarely feel fully relaxed or at ease.'
+        ]
+      }
+    ];
+
+    const ALL_Q = [];
+    DIMS.forEach(d => d.qs.forEach(q => ALL_Q.push({ text: q, dim: d.id, dimLabel: d.label })));
+    const TOTAL = ALL_Q.length;
+
+    let answers = new Array(TOTAL).fill(null);
+    let current = 0;
+    let userName = '';
+
+    // ── KIT FORM IDs — one per outcome tier ──────────────────────────────────────
+    const KIT_FORMS = {
+      high: '9209415',
+      mid: '9209576',
+      low: '9209580'
+    };
+
+    // ── OUTCOMES ──────────────────────────────────────────────────────────────────
+    const OUTCOMES = {
+      high: {
+        tier: 'The Performing Being',
+        tagline: 'All drive. No peace... Yet.',
+        desc: n => `${n}, you are someone who runs on high. You achieve, you deliver, you show up but underneath this, peace feels like something you'll get to eventually. The problem is eventually never comes. This isn't about what's happening around you, it's about what's happening inside and that can shift faster than you think.`,
+        videoUrl: 'https://player.vimeo.com/video/1175232307',
+        videoTitle: 'A message for The Performing Being',
+        ctaHeading: 'Your Peace is Closer Than You Think.',
+        ctaBody: 'Most of the people I work with arrive at this level. High performing, externally successful while quietly exhausted. Within weeks they experience a measurable shift in how life feels not by working less, but by understanding what\'s actually driving the pressure.',
+        ctaBtn: 'Book a Free Discovery Call',
+        ctaLink: 'https://tidycal.com/shaundotcoach/coachingcall-performingbeing'
+      },
+      mid: {
+        tier: 'The Seeking Being',
+        tagline: "Something's shifting. You can feel it.",
+        desc: n => `${n}, you're managing well on the outside. But there's a quiet undercurrent of tension you've probably learned to live with. You're starting to sense that the next achievement won't be the thing that brings peace. Awareness is everything. You're closer than you think.`,
+        videoUrl: 'https://player.vimeo.com/video/1175175421',
+        videoTitle: 'A message for The Seeking Being',
+        ctaHeading: "There's more available to you.",
+        ctaBody: 'The Seeking Being is often the most interesting person to work with. You already sense the gap between performing well and feeling well. A single conversation can be enough to show you what\'s possible where you can live from your Peace and Power day to day while letting the Performance take care of itself.',
+        ctaBtn: 'Book a Free Discovery Call',
+        ctaLink: 'https://tidycal.com/shaundotcoach/coachingcall-10wgvjv-mnx8k7v-1vrqyqz'
+      },
+      low: {
+        tier: 'The Grounded Being',
+        tagline: 'Peace is present. Power is natural.',
+        desc: n => `${n}, you're carrying relatively little internal pressure right now. There's more ease in how you move through life, performance feels less effortful and peace is more accessible. Whether this is the result of inner work or simply a quieter season, it's worth understanding why so you can return to your Peace Power & Performance whenever things shift.`,
+        videoUrl: 'https://player.vimeo.com/video/1173974613',
+        videoTitle: 'A message for The Grounded Being',
+        ctaHeading: 'Worth staying connected.',
+        ctaBody: 'Even when things feel settled, having a framework for returning to this state when pressure builds is one of the most valuable things you can have. I\'d love to share mine with you.',
+        ctaBtn: 'Book a Free Discovery Call',
+        ctaLink: 'https://tidycal.com/shaundotcoach/coachingcall-10wgvjv-mnx8k7v'
+      }
+    };
+
+    // ── QUIZ ──────────────────────────────────────────────────────────────────────
+    function startQuiz() {
+      document.getElementById('screen-intro').classList.add('hidden');
+      document.getElementById('screen-quiz').classList.remove('hidden');
+      render(0);
+    }
+
+    function render(idx) {
+      const q = ALL_Q[idx];
+      document.getElementById('q-num').textContent = `Question ${idx + 1} of ${TOTAL}`;
+      document.getElementById('q-dim').textContent = q.dimLabel;
+      document.getElementById('prog-fill').style.width = `${(idx / TOTAL) * 100}%`;
+
+      document.getElementById('q-area').innerHTML = `
+    <div class="q-card">
+      <div class="q-text">${q.text}</div>
+      <div class="scale-labels"><span>Not at all true</span><span>Completely true</span></div>
+      <div class="scale-btns">
+        ${[1, 2, 3, 4, 5].map(v => `
+          <button class="s-btn ${answers[idx] === v ? 'selected' : ''}" data-val="${v}" onclick="pick(${idx},${v},this)">${v}</button>
+        `).join('')}
+      </div>
+      ${idx > 0 ? `<button class="btn-back" onclick="go(${idx - 1})">← Back</button>` : ''}
+    </div>
+  `;
+    }
+
+    function pick(idx, val, el) {
+      answers[idx] = val;
+      document.querySelectorAll('.s-btn').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+      setTimeout(() => {
+        // Blank canvas moment — eye resets before new question appears
+        document.getElementById('q-area').innerHTML = '';
+        setTimeout(() => {
+          current = idx + 1;
+          if (current >= TOTAL) showGate();
+          else render(current);
+        }, 180);
+      }, 200);
+    }
+
+    function go(idx) { current = idx; render(idx); }
+
+    // ── GATE ──────────────────────────────────────────────────────────────────────
+    function showGate() {
+      document.getElementById('screen-quiz').classList.add('hidden');
+      document.getElementById('screen-email').classList.remove('hidden');
+    }
+
+    function submitGate() {
+      const name = document.getElementById('inp-name').value.trim();
+      const email = document.getElementById('inp-email').value.trim();
+      if (!name || !email || !email.includes('@')) {
+        alert('Please enter your name and a valid email address.');
+        return;
+      }
+      userName = name;
+      const key = outcomeKey();
+      sendToKit(name, email, key);
+      document.getElementById('screen-email').classList.add('hidden');
+      showResults(name);
+    }
+
+    // ── KIT ───────────────────────────────────────────────────────────────────────
+    function sendToKit(name, email, key) {
+      const formId = KIT_FORMS[key];
+      const fd = new FormData();
+      fd.append('email_address', email);
+      fd.append('first_name', name);
+      fetch(`https://app.kit.com/forms/${formId}/subscriptions`, {
+        method: 'POST',
+        body: fd,
+        mode: 'no-cors'
+      }).catch(() => { });
+    }
+
+    // ── SCORING ───────────────────────────────────────────────────────────────────
+    function outcomeKey() {
+      const t = answers.reduce((a, b) => a + (b || 0), 0);
+      return t >= 63 ? 'high' : t >= 36 ? 'mid' : 'low';
+    }
+
+    function dimScores() {
+      const s = {};
+      DIMS.forEach(d => { s[d.id] = 0; });
+      ALL_Q.forEach((q, i) => { s[q.dim] += (answers[i] || 0); });
+      return s;
+    }
+
+    // ── RESULTS ───────────────────────────────────────────────────────────────────
+    function showResults(name) {
+      const key = outcomeKey();
+      const out = OUTCOMES[key];
+      const ds = dimScores();
+      const total = answers.reduce((a, b) => a + (b || 0), 0);
+      const MAX = 90, MD = 15;
+
+      const videoSet = out.videoUrl && !out.videoUrl.includes('YOUR_');
+      const videoHTML = videoSet
+        ? `<iframe src="${out.videoUrl}" allowfullscreen allow="autoplay; fullscreen"></iframe>`
+        : `<div class="video-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/>
+        </svg>
+        <span>Your personal video from Shaun</span>
+      </div>`;
+
+      const screen = document.getElementById('screen-results');
+      screen.classList.remove('hidden');
+      screen.innerHTML = `
+    <div class="result-hero">
+      <div class="result-eyebrow">Your Pressure Score</div>
+      <div class="result-name-label">Hello, ${name}. You are —</div>
+      <div class="result-tier"><em>${out.tier}</em></div>
+      <div class="result-tagline">${out.tagline}</div>
+      <div class="result-score-wrap">
+        <span class="result-score-num">${total}</span>
+        <span class="result-score-denom">/ ${MAX}</span>
+      </div>
+      <p class="result-desc">${out.desc(name)}</p>
+    </div>
+
+    <div class="video-block">
+      <div class="video-label">A personal message</div>
+      <div class="video-heading">${out.videoTitle}</div>
+      <div class="video-embed">${videoHTML}</div>
+    </div>
+
+    <div class="breakdown">
+      <div class="breakdown-title">Your breakdown</div>
+      ${DIMS.map(d => {
+        const raw = ds[d.id];
+        const pct = Math.round((raw / MD) * 100);
+        const cls = pct >= 67 ? 'hi' : pct >= 40 ? 'md' : 'lo';
+        return `<div class="dim-row">
+          <div class="dim-name">${d.label}</div>
+          <div class="dim-track"><div class="dim-fill ${cls}" style="width:0%" data-w="${pct}%"></div></div>
+          <div class="dim-val">${raw}/${MD}</div>
+        </div>`;
+      }).join('')}
+    </div>
+
+    <div class="cta-block">
+      <div class="cta-eyebrow">What Next</div>
+      <h3>${out.ctaHeading}</h3>
+      <p>${out.ctaBody}</p>
+      <a class="btn-cta" href="${out.ctaLink}" target="_blank">${out.ctaBtn}</a>
+    </div>
+  `;
+
+      setTimeout(() => {
+        screen.querySelectorAll('.dim-fill').forEach(b => { b.style.width = b.dataset.w; });
+      }, 300);
+    }
+  </script>
+</body>
+
+</html>
